@@ -5,8 +5,10 @@ try:
     from time import perf_counter_ns as monotonic_ns
     # from day01_cpython import total_calories_by_elf, part1, part2
     from day01_circuitpython import total_calories_by_elf, part1, part2
+    IS_CPYTHON = True
 
 except ImportError:
+    IS_CPYTHON = False
     from time import monotonic_ns
     from day01_circuitpython import total_calories_by_elf, part1, part2
 
@@ -32,7 +34,7 @@ else:
 print('~'*40)
 print(f'Elapsed time: {(t1-t0)/1e9:.03e}s')
 
-# gc.collect()
+gc.collect()
 
 
 # %% Run test for Day 1, Part 2
@@ -52,7 +54,7 @@ else:
 
 print('~' * 40)
 print(f'Elapsed time: {(t1 - t0) / 1e9:.03e}s')
-# gc.collect()
+gc.collect()
 
 
 #%% Run puzzle for Day 1, Part 1
@@ -69,7 +71,7 @@ print('~'*40)
 print(f'Elapsed time: {(t1-t0)/1e9:.03e}s')
 
 
-# gc.collect()
+gc.collect()
 
 
 #%% Run puzzle for Day 1, Part 1
@@ -84,6 +86,9 @@ t1 = monotonic_ns()
 print('~'*40)
 print(f'Elapsed time: {(t1-t0)/1e9:.03e}s')
 
+gc.collect()
+
 
 #%%
-
+if not IS_CPYTHON:
+    print(f'\n\n\n\nFree memory: {gc.mem_free()}')
