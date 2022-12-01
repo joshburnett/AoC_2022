@@ -1,35 +1,89 @@
-from helpers import parse_test_input
+# from helpers import parse_test_input
+import gc
 
 try:
     from time import perf_counter_ns as monotonic_ns
+    # from day01_cpython import total_calories_by_elf, part1, part2
+    from day01_circuitpython import total_calories_by_elf, part1, part2
+
 except ImportError:
     from time import monotonic_ns
+    from day01_circuitpython import total_calories_by_elf, part1, part2
 
-test_inputs, test_answer = parse_test_input(day=1)
-
-
-def part1(input_list):
-    # t0 = time.perf_counter()
-    t0 = monotonic_ns()
-    calories = [0]
-
-    for n, line in enumerate(input_list):
-        if line == '':
-            calories.append(0)
-        else:
-            calories[-1] += int(line)
-
-    max_cals = max(calories)
-    max_elf = calories.index(max_cals)
-    # print(f'Elapsed time: {(time.perf_counter()-t0):.3g}s')
-    print(f'Elapsed time: {(monotonic_ns()-t0)/1e9:.03e}s')
-    print(f'Max calories: {max_cals}, carried by elf #{max_elf+1}')
-    return max_cals
+DAY = 1
 
 
-max_cals = part1(test_inputs)
+#%% Run test for Day 1, Part 1
+print(f'\n\n\n\nRunning test for Day {DAY}, Part 1:')
+print('~'*40)
 
-if max_cals == test_answer:
+t0 = monotonic_ns()
+
+calories_list = total_calories_by_elf(input_file_path='AOC inputs/day01_test.txt')
+max_cals = part1(calories_list)
+
+t1 = monotonic_ns()
+
+if max_cals == 24_000:
     print('Test passed')
 else:
     print('Incorrect result')
+
+print('~'*40)
+print(f'Elapsed time: {(t1-t0)/1e9:.03e}s')
+
+# gc.collect()
+
+
+# %% Run test for Day 1, Part 2
+print(f'\n\n\n\nRunning test for Day {DAY}, Part 2:')
+print('~' * 40)
+
+t0 = monotonic_ns()
+
+top_3_cals_total = part2(calories_list)
+
+t1 = monotonic_ns()
+
+if top_3_cals_total == 45_000:
+    print('Test passed')
+else:
+    print('Incorrect result')
+
+print('~' * 40)
+print(f'Elapsed time: {(t1 - t0) / 1e9:.03e}s')
+# gc.collect()
+
+
+#%% Run puzzle for Day 1, Part 1
+print(f'\n\n\n\nRunning puzzle for Day {DAY}, Part 1:')
+print('~'*40)
+
+t0 = monotonic_ns()
+
+calories_list = total_calories_by_elf(input_file_path='AOC inputs/day01.txt')
+max_cals = part1(calories_list)
+
+t1 = monotonic_ns()
+print('~'*40)
+print(f'Elapsed time: {(t1-t0)/1e9:.03e}s')
+
+
+# gc.collect()
+
+
+#%% Run puzzle for Day 1, Part 1
+print(f'\n\n\n\nRunning puzzle for Day {DAY}, Part 2:')
+print('~'*40)
+
+t0 = monotonic_ns()
+
+top_3_cals_total = part2(calories_list)
+
+t1 = monotonic_ns()
+print('~'*40)
+print(f'Elapsed time: {(t1-t0)/1e9:.03e}s')
+
+
+#%%
+
