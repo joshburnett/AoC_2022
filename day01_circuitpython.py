@@ -1,3 +1,5 @@
+python_runtime = {'name': None}
+
 #%%
 def total_calories_by_elf(input_file_path: str):
     calories = [0]
@@ -15,7 +17,7 @@ def total_calories_by_elf(input_file_path: str):
                 else:
                     calories[-1] += int(line)
 
-    print(f'{line_num} lines (CircuitPython')
+    print(f'{line_num} lines ({python_runtime["name"]})')
     return calories
 
 

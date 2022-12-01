@@ -4,13 +4,20 @@ import gc
 try:
     from time import perf_counter_ns as monotonic_ns
     # from day01_cpython import total_calories_by_elf, part1, part2
-    from day01_circuitpython import total_calories_by_elf, part1, part2
-    IS_CPYTHON = True
+    from day01_circuitpython import total_calories_by_elf, part1, part2, python_runtime
+    python_runtime['name'] = 'CPython'
 
 except ImportError:
-    IS_CPYTHON = False
-    from time import monotonic_ns
-    from day01_circuitpython import total_calories_by_elf, part1, part2
+    try:
+        from time import monotonic_ns
+        from day01_circuitpython import total_calories_by_elf, part1, part2, python_runtime
+        python_runtime['name'] = 'CircuitPython'
+    except ImportError:
+        from time import ticks_us
+        from day01_circuitpython import total_calories_by_elf, part1, part2, python_runtime
+        python_runtime['name'] = 'MicroPython'
+        def monotonic_ns():
+            return ticks_us()*1000
 
 DAY = 1
 
@@ -34,7 +41,7 @@ else:
 print('~'*40)
 print(f'Elapsed time: {(t1-t0)/1e9:.03e}s')
 
-gc.collect()
+# gc.collect()
 
 
 # %% Run test for Day 1, Part 2
@@ -54,7 +61,8 @@ else:
 
 print('~' * 40)
 print(f'Elapsed time: {(t1 - t0) / 1e9:.03e}s')
-gc.collect()
+
+# gc.collect()
 
 
 #%% Run puzzle for Day 1, Part 1
@@ -71,7 +79,7 @@ print('~'*40)
 print(f'Elapsed time: {(t1-t0)/1e9:.03e}s')
 
 
-gc.collect()
+# gc.collect()
 
 
 #%% Run puzzle for Day 1, Part 1
@@ -90,5 +98,5 @@ gc.collect()
 
 
 #%%
-if not IS_CPYTHON:
+if not python_runtime['name'] == 'CPython':
     print(f'\n\n\n\nFree memory: {gc.mem_free()}')
