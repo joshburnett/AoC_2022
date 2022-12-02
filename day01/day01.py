@@ -82,7 +82,7 @@ print(f'Elapsed time: {(t1-t0)/1e9:.03e}s')
 # gc.collect()
 
 
-#%% Run puzzle for Day 1, Part 1
+#%% Run puzzle for Day 1, Part 2
 print(f'\n\n\n\nRunning puzzle for Day {DAY}, Part 2:')
 print('~'*40)
 

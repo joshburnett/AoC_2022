@@ -1,5 +1,6 @@
 python_runtime = {'name': None}
 
+
 #%%
 def total_calories_by_elf(input_file_path: str):
     calories = [0]
