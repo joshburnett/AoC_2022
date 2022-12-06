@@ -51,6 +51,11 @@ with open('day06_test.txt', 'r') as f:
         print(f'n: {n + 1}    {chars.strip()}\n')
 
 # %% Part 1
+print(f'\n\n\n\nRunning puzzle, Part 2:')
+print('~' * 40)
+
+t0 = monotonic_ns()
+
 q = deque(maxlen=4)
 
 with open('day06.txt', 'r') as f:
@@ -60,9 +65,20 @@ with open('day06.txt', 'r') as f:
         if len(set(q)) == 4:
             break
 
-    print(f'n: {n + 1}')
+    t1 = monotonic_ns()
+
+print(f'n: {n + 1}')
+
+print('~' * 40)
+print(f'Elapsed time: {(t1 - t0) / 1e9:.03e}s')
+
 
 # %% Part 2
+print(f'\n\n\n\nRunning puzzle, Part 2:')
+print('~' * 40)
+
+t0 = monotonic_ns()
+
 q = deque(maxlen=14)
 
 with open('day06.txt', 'r') as f:
@@ -72,4 +88,10 @@ with open('day06.txt', 'r') as f:
         if len(set(q)) == 14:
             break
 
-    print(f'n: {n + 1}')
+    t1 = monotonic_ns()
+
+print(f'n: {n + 1}')
+
+print('~' * 40)
+print(f'Elapsed time: {(t1 - t0) / 1e9:.03e}s')
+
