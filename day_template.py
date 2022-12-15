@@ -13,9 +13,7 @@ from copy import copy
 #%%
 
 
-# %% Part 2, test 1
+# %% Part 2, test
 
-
-# %% Part 2, test 2
 
 # %% Part 2, puzzle
